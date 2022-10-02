@@ -12,7 +12,7 @@
 
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  */
-
+import { useState } from "react";
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
@@ -55,6 +55,41 @@ const timezones = [
 ];
 
 function ActivityLog() {
+  const [email, setEmail] = useState("");
+  const emailChangeHandler = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const [appToken, setAppToken] = useState("");
+  const appTokenChangeHandler = (event) => {
+    setAppToken(event.target.value);
+  };
+
+  const [apiToken, setApiToken] = useState("");
+  const apiTokenChangeHandler = (event) => {
+    setApiToken(event.target.value);
+  };
+
+  const [activityKind, setActivityKind] = useState("");
+  const activityKindChangeHandler = (event) => {
+    setActivityKind(event.target.value);
+  };
+
+  const today = new Date().toISOString().slice(0, 10);
+  const [startDate, setStartDate] = useState(today);
+  const startDateChangeHandler = (event) => {
+    setStartDate(event.target.value);
+  };
+  const [endDate, setEndDate] = useState(today);
+  const endDateChangeHandler = (event) => {
+    setEndDate(event.target.value);
+  };
+
+  const [timezone, setTimezone] = useState("Asia/Seoul");
+  const timezoneChangeHandler = (event) => {
+    setTimezone(event.target.value);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -68,13 +103,34 @@ function ActivityLog() {
               <MDBox pt={2} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2}>
-                    <MDInput type="email" label="Email" fullWidth />
+                    <MDInput
+                      required
+                      type="email"
+                      label="Email"
+                      value={email}
+                      fullWidth
+                      onChange={emailChangeHandler}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="App Token" fullWidth />
+                    <MDInput
+                      required
+                      type="text"
+                      label="App Token"
+                      value={appToken}
+                      fullWidth
+                      onChange={appTokenChangeHandler}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="Api Token" fullWidth />
+                    <MDInput
+                      required
+                      type="text"
+                      label="Api Token"
+                      value={apiToken}
+                      fullWidth
+                      onChange={apiTokenChangeHandler}
+                    />
                   </MDBox>
                   <MDBox mb={2}>
                     <TextField
@@ -82,6 +138,8 @@ function ActivityLog() {
                       id="activity-kind-select"
                       select
                       label="Activity Kind"
+                      value={activityKind}
+                      onChange={activityKindChangeHandler}
                       InputProps={{
                         classes: { root: "select-input-styles" },
                       }}
@@ -96,17 +154,21 @@ function ActivityLog() {
                   </MDBox>
                   <MDBox mb={2}>
                     <MDInput
+                      required
                       type="date"
                       label="Start Date"
-                      value={new Date().toISOString().slice(0, 10)}
+                      value={startDate}
+                      onChange={startDateChangeHandler}
                       fullWidth
                     />
                   </MDBox>
                   <MDBox mb={2}>
                     <MDInput
+                      required
                       type="date"
                       label="End Date"
-                      value={new Date().toISOString().slice(0, 10)}
+                      value={endDate}
+                      onChange={endDateChangeHandler}
                       fullWidth
                     />
                   </MDBox>
