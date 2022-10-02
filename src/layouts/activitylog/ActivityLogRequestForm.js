@@ -144,9 +144,9 @@ function ActivityLogRequestForm(prop) {
       setAppToken({ ...appToken, value: appToken.value, error: false });
       setApiKey({ ...apiKey, value: apiKey.value, error: false });
       setActivityKind({ ...activityKind, value: "", error: false });
-      setStartDate({ ...startDate, value: today, error: false });
-      setEndDate({ ...endDate, value: today, error: false });
-      setTimezone({ ...timezone, value: DEFAULT_TIME_ZONE, error: false });
+      setStartDate({ ...startDate, value: startDate.value, error: false });
+      setEndDate({ ...endDate, value: endDate.value, error: false });
+      setTimezone({ ...timezone, value: timezone.value, error: false });
     };
 
     const body = {
