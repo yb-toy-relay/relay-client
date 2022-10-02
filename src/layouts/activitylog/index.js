@@ -25,8 +25,12 @@ import ActivityLogRequestForm from "./ActivityLogRequestForm";
 
 function ActivityLog() {
   // send http request
-  const sendActivityLogRequestHandler = (data) => {
-    console.log(data);
+  const sendActivityLogRequestHandler = (request) => {
+    console.log(request);
+    // http 200
+    if (request.email === "success") {
+      request.onSuccess();
+    }
   };
   return (
     <DashboardLayout>

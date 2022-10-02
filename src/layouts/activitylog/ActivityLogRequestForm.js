@@ -33,6 +33,14 @@ const timezones = [
   },
 ];
 
+const isNotEmpty = (stateObject, setState) => {
+  if (stateObject.value === "") {
+    setState({ ...stateObject, error: true });
+  } else {
+    setState({ ...stateObject, value: stateObject.value, error: false });
+  }
+};
+
 function ActivityLogRequestForm(prop) {
   const { onSubmitHandler } = prop;
   const [email, setEmail] = useState({
@@ -107,40 +115,24 @@ function ActivityLogRequestForm(prop) {
 
   const sendRequestHandler = (event) => {
     event.preventDefault();
-    if (email.value === "") {
-      setEmail({ ...email, error: true });
-      return;
-    }
+    isNotEmpty(email, setEmail);
+    isNotEmpty(appToken, setAppToken);
+    isNotEmpty(apiKey, setApiKey);
+    isNotEmpty(activityKind, setActivityKind);
+    isNotEmpty(startDate, setStartDate);
+    isNotEmpty(endDate, setEndDate);
+    isNotEmpty(timezone, setTimezone);
 
-    if (appToken.value === "") {
-      setAppToken({ ...appToken, error: true });
-      return;
-    }
-
-    if (apiKey.value === "") {
-      setApiKey({ ...apiKey, error: true });
-      return;
-    }
-
-    if (activityKind.value === "") {
-      setActivityKind({ ...activityKind, error: true });
-      return;
-    }
-
-    if (startDate.value === "") {
-      setStartDate({ ...startDate, error: true });
-      return;
-    }
-
-    if (endDate.value === "") {
-      setEndDate({ ...endDate, error: true });
-      return;
-    }
-
-    if (timezone.value === "") {
-      setTimezone({ ...timezone, error: true });
-      return;
-    }
+    const onSuccessCallback = () => {
+      console.log("onSuccessCallback");
+      setEmail({ ...email, value: email.value, error: false });
+      setAppToken({ ...appToken, value: appToken.value, error: false });
+      setApiKey({ ...apiKey, value: apiKey.value, error: false });
+      setActivityKind({ ...activityKind, value: activityKind.value, error: false });
+      setStartDate({ ...startDate, value: startDate.value, error: false });
+      setEndDate({ ...endDate, value: endDate.value, error: false });
+      setTimezone({ ...timezone, value: timezone.value, error: false });
+    };
 
     onSubmitHandler({
       apiKey: apiKey.value,
@@ -150,18 +142,8 @@ function ActivityLogRequestForm(prop) {
       startDate: startDate.value,
       endDate: endDate.value,
       timezone: timezone.value,
+      onSuccess: onSuccessCallback,
     });
-
-    // after http 200
-    if (email.value === "success") {
-      setEmail({ ...email, value: email.value, error: false });
-      setAppToken({ ...appToken, value: appToken.value, error: false });
-      setApiKey({ ...apiKey, value: apiKey.value, error: false });
-      setActivityKind({ ...activityKind, value: activityKind.value, error: false });
-      setStartDate({ ...startDate, value: startDate.value, error: false });
-      setEndDate({ ...endDate, value: endDate.value, error: false });
-      setTimezone({ ...timezone, value: timezone.value, error: false });
-    }
   };
   return (
     <Card>
