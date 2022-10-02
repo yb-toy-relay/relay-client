@@ -16,6 +16,7 @@
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
+import { MenuItem } from "@mui/material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -37,9 +38,9 @@ function ActivityLog() {
           <Grid item xs={12} lg={8}>
             <Card>
               <MDBox p={2}>
-                <MDTypography variant="h5">CSV Download Request</MDTypography>
+                <MDTypography variant="h4">CSV Request</MDTypography>
               </MDBox>
-              <MDBox pt={4} pb={3} px={3}>
+              <MDBox pt={2} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2}>
                     <MDInput type="email" label="Email" fullWidth />
@@ -51,10 +52,37 @@ function ActivityLog() {
                     <MDInput type="text" label="Api Token" fullWidth />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="Activity Kind" fullWidth />
+                    <MDInput
+                      size="large"
+                      select
+                      labelId="activity-kind-label"
+                      id="activity-kind-select"
+                      label="Activity Kind"
+                      InputProps={{
+                        classes: { root: "select-input-styles" },
+                      }}
+                      fullWidth
+                    >
+                      <MenuItem value="install">Install</MenuItem>
+                      <MenuItem value="event">Event</MenuItem>
+                      <MenuItem value="reattribution">Reattribution</MenuItem>
+                    </MDInput>
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput type="text" label="Time Zone" fullWidth />
+                    <MDInput
+                      size="large"
+                      select
+                      labelId="timezone-label"
+                      id="timezone-select"
+                      label="Time Zone"
+                      InputProps={{
+                        classes: { root: "select-input-styles" },
+                      }}
+                      fullWidth
+                    >
+                      <MenuItem value="Asia/Seoul">Asia/Seoul</MenuItem>
+                      <MenuItem value="UTC">UTC</MenuItem>
+                    </MDInput>
                   </MDBox>
                   <MDBox mb={2}>
                     <MDInput
@@ -74,7 +102,7 @@ function ActivityLog() {
                   </MDBox>
                   <MDBox mt={4} mb={1}>
                     <MDButton variant="gradient" color="info" fullWidth>
-                      Download
+                      Send CSV File to Email
                     </MDButton>
                   </MDBox>
                 </MDBox>

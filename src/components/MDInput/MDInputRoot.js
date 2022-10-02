@@ -16,6 +16,7 @@ Coded by www.creative-tim.com
 // @mui material components
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
+import "./inputCustomStyles.css";
 
 export default styled(TextField)(({ theme, ownerState }) => {
   const { palette, functions } = theme;
