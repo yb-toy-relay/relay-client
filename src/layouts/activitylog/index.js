@@ -50,15 +50,26 @@ function ActivityLog() {
   };
 
   // send http request
-  const sendActivityLogRequestHandler = (request) => {
-    console.log(request);
-    // http 200
-    if (request.email === "success") {
-      request.onSuccess();
-      handleSuccess("200 OK");
-    } else {
-      handleError("500 ERROR");
-    }
+  const activityLogPostHandler = (request) => {
+    fetch("http://localhost:8882/relay/v1/activity-log/csv", {
+      method: "POST",
+      body: JSON.stringify(request.body),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          handleError(`Request Failed. status: ${response.status}`);
+          return;
+        }
+        request.onSuccessCallback();
+        handleSuccess(`Request Success. status: ${response.status}`);
+      })
+      .catch((err) => {
+        console.error("http request not available:", err);
+        handleError("Unknown Error.");
+      });
   };
   return (
     <DashboardLayout>
@@ -66,7 +77,7 @@ function ActivityLog() {
       <MDBox mt={6} mb={3}>
         <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} lg={8}>
-            <ActivityLogRequestForm onSubmitHandler={sendActivityLogRequestHandler} />
+            <ActivityLogRequestForm onSubmitHandler={activityLogPostHandler} />
           </Grid>
         </Grid>
       </MDBox>

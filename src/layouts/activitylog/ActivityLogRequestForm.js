@@ -140,7 +140,6 @@ function ActivityLogRequestForm(prop) {
     }
 
     const onSuccessCallback = () => {
-      console.log("onSuccessCallback");
       setEmail({ ...email, value: email.value, error: false });
       setAppToken({ ...appToken, value: appToken.value, error: false });
       setApiKey({ ...apiKey, value: apiKey.value, error: false });
@@ -150,18 +149,16 @@ function ActivityLogRequestForm(prop) {
       setTimezone({ ...timezone, value: DEFAULT_TIME_ZONE, error: false });
     };
 
-    onSubmitHandler({
-      body: {
-        apiKey: apiKey.value,
-        email: email.value,
-        appToken: appToken.value,
-        activityKind: activityKind.value,
-        startDate: startDate.value,
-        endDate: endDate.value,
-        timezone: timezone.value,
-      },
-      onSuccess: onSuccessCallback,
-    });
+    const body = {
+      apiKey: apiKey.value,
+      email: email.value,
+      appToken: appToken.value,
+      activityKind: activityKind.value,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      timezone: timezone.value,
+    };
+    onSubmitHandler({ body, onSuccessCallback });
   };
   return (
     <Card>
