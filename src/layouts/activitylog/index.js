@@ -177,7 +177,6 @@ function ActivityLog() {
                       id="timezone-select"
                       select
                       label="Time Zone"
-                      helperText="default timezone is Asia/Seoul"
                       value={timezone}
                       onChange={timezoneChangeHandler}
                       InputProps={{
