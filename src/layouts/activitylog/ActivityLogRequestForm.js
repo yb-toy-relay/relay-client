@@ -7,7 +7,7 @@ import MDButton from "../../components/MDButton";
 
 const DEFAULT_TIME_ZONE = "Asia/Seoul";
 
-const activityKinds = [
+const ACTIVITY_KINDS = [
   {
     value: "install",
     label: "Install",
@@ -22,7 +22,7 @@ const activityKinds = [
   },
 ];
 
-const timezones = [
+const TIMEZONES = [
   {
     value: DEFAULT_TIME_ZONE,
     label: DEFAULT_TIME_ZONE,
@@ -207,7 +207,7 @@ function ActivityLogRequestForm(prop) {
               }}
               fullWidth
             >
-              {activityKinds.map((option) => (
+              {ACTIVITY_KINDS.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
@@ -255,7 +255,7 @@ function ActivityLogRequestForm(prop) {
               }}
               fullWidth
             >
-              {timezones.map((option) => (
+              {TIMEZONES.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
