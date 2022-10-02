@@ -21,7 +21,6 @@ import { MenuItem, TextField } from "@mui/material";
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
-import MDInput from "components/MDInput";
 
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
@@ -117,7 +116,7 @@ function ActivityLog() {
               <MDBox pt={2} pb={3} px={3}>
                 <MDBox component="form" role="form">
                   <MDBox mb={2}>
-                    <MDInput
+                    <TextField
                       required
                       type="email"
                       label="Email"
@@ -127,7 +126,7 @@ function ActivityLog() {
                     />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput
+                    <TextField
                       required
                       type="text"
                       label="App Token"
@@ -137,7 +136,7 @@ function ActivityLog() {
                     />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput
+                    <TextField
                       required
                       type="text"
                       label="Api Key"
@@ -167,7 +166,7 @@ function ActivityLog() {
                     </TextField>
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput
+                    <TextField
                       required
                       type="date"
                       label="Start Date"
@@ -177,7 +176,7 @@ function ActivityLog() {
                     />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput
+                    <TextField
                       required
                       type="date"
                       label="End Date"
