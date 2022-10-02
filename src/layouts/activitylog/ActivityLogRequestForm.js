@@ -33,14 +33,6 @@ const TIMEZONES = [
   },
 ];
 
-const isNotEmpty = (stateObject, setState) => {
-  if (stateObject.value === "") {
-    setState({ ...stateObject, error: true });
-  } else {
-    setState({ ...stateObject, value: stateObject.value, error: false });
-  }
-};
-
 function ActivityLogRequestForm(prop) {
   const { onSubmitHandler } = prop;
   const [email, setEmail] = useState({
@@ -115,13 +107,37 @@ function ActivityLogRequestForm(prop) {
 
   const sendRequestHandler = (event) => {
     event.preventDefault();
-    isNotEmpty(email, setEmail);
-    isNotEmpty(appToken, setAppToken);
-    isNotEmpty(apiKey, setApiKey);
-    isNotEmpty(activityKind, setActivityKind);
-    isNotEmpty(startDate, setStartDate);
-    isNotEmpty(endDate, setEndDate);
-    isNotEmpty(timezone, setTimezone);
+
+    const isEmpty = (stateObject, setState) => {
+      if (stateObject.value === "") {
+        setState({ ...stateObject, error: true });
+        return true;
+      }
+      setState({ ...stateObject, value: stateObject.value, error: false });
+      return false;
+    };
+
+    if (isEmpty(email, setEmail)) {
+      return;
+    }
+    if (isEmpty(appToken, setAppToken)) {
+      return;
+    }
+    if (isEmpty(apiKey, setApiKey)) {
+      return;
+    }
+    if (isEmpty(activityKind, setActivityKind)) {
+      return;
+    }
+    if (isEmpty(startDate, setStartDate)) {
+      return;
+    }
+    if (isEmpty(endDate, setEndDate)) {
+      return;
+    }
+    if (isEmpty(timezone, setTimezone)) {
+      return;
+    }
 
     const onSuccessCallback = () => {
       console.log("onSuccessCallback");
@@ -135,13 +151,15 @@ function ActivityLogRequestForm(prop) {
     };
 
     onSubmitHandler({
-      apiKey: apiKey.value,
-      email: email.value,
-      appToken: appToken.value,
-      activityKind: activityKind.value,
-      startDate: startDate.value,
-      endDate: endDate.value,
-      timezone: timezone.value,
+      body: {
+        apiKey: apiKey.value,
+        email: email.value,
+        appToken: appToken.value,
+        activityKind: activityKind.value,
+        startDate: startDate.value,
+        endDate: endDate.value,
+        timezone: timezone.value,
+      },
       onSuccess: onSuccessCallback,
     });
   };
