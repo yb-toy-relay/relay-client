@@ -16,7 +16,7 @@
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import { MenuItem } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -26,8 +26,33 @@ import MDInput from "components/MDInput";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
 import MDTypography from "../../components/MDTypography";
+
+const activityKinds = [
+  {
+    value: "install",
+    label: "Install",
+  },
+  {
+    value: "event",
+    label: "Event",
+  },
+  {
+    value: "install",
+    label: "Install",
+  },
+];
+
+const timezones = [
+  {
+    value: "Asia/Seoul",
+    label: "Asia/Seoul",
+  },
+  {
+    value: "UTC",
+    label: "UTC",
+  },
+];
 
 function ActivityLog() {
   return (
@@ -52,37 +77,22 @@ function ActivityLog() {
                     <MDInput type="text" label="Api Token" fullWidth />
                   </MDBox>
                   <MDBox mb={2}>
-                    <MDInput
-                      size="large"
-                      select
-                      labelId="activity-kind-label"
+                    <TextField
+                      required
                       id="activity-kind-select"
+                      select
                       label="Activity Kind"
                       InputProps={{
                         classes: { root: "select-input-styles" },
                       }}
                       fullWidth
                     >
-                      <MenuItem value="install">Install</MenuItem>
-                      <MenuItem value="event">Event</MenuItem>
-                      <MenuItem value="reattribution">Reattribution</MenuItem>
-                    </MDInput>
-                  </MDBox>
-                  <MDBox mb={2}>
-                    <MDInput
-                      size="large"
-                      select
-                      labelId="timezone-label"
-                      id="timezone-select"
-                      label="Time Zone"
-                      InputProps={{
-                        classes: { root: "select-input-styles" },
-                      }}
-                      fullWidth
-                    >
-                      <MenuItem value="Asia/Seoul">Asia/Seoul</MenuItem>
-                      <MenuItem value="UTC">UTC</MenuItem>
-                    </MDInput>
+                      {activityKinds.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </MDBox>
                   <MDBox mb={2}>
                     <MDInput
@@ -100,7 +110,27 @@ function ActivityLog() {
                       fullWidth
                     />
                   </MDBox>
-                  <MDBox mt={4} mb={1}>
+                  <MDBox mb={2}>
+                    <TextField
+                      id="timezone-select"
+                      select
+                      label="Time Zone"
+                      helperText="default timezone is Asia/Seoul"
+                      value={timezone}
+                      onChange={timezoneChangeHandler}
+                      InputProps={{
+                        classes: { root: "select-input-styles" },
+                      }}
+                      fullWidth
+                    >
+                      {timezones.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </MDBox>
+                  <MDBox mt={4} mb={2}>
                     <MDButton variant="gradient" color="info" fullWidth>
                       Send CSV File to Email
                     </MDButton>
