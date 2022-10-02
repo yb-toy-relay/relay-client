@@ -27,6 +27,8 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import MDTypography from "../../components/MDTypography";
 
+const DEFAULT_TIME_ZONE = "Asia/Seoul";
+
 const activityKinds = [
   {
     value: "install",
@@ -44,8 +46,8 @@ const activityKinds = [
 
 const timezones = [
   {
-    value: "Asia/Seoul",
-    label: "Asia/Seoul",
+    value: DEFAULT_TIME_ZONE,
+    label: DEFAULT_TIME_ZONE,
   },
   {
     value: "UTC",
@@ -54,53 +56,134 @@ const timezones = [
 ];
 
 function ActivityLog() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState({
+    name: "email",
+    value: "",
+    error: false,
+    errorMessage: "invalid email",
+  });
   const emailChangeHandler = (event) => {
-    setEmail(event.target.value);
+    setEmail({ ...email, value: event.target.value });
   };
 
-  const [appToken, setAppToken] = useState("");
+  const [appToken, setAppToken] = useState({
+    name: "appToken",
+    value: "",
+    error: false,
+    errorMessage: "invalid app token",
+  });
   const appTokenChangeHandler = (event) => {
-    setAppToken(event.target.value);
+    setAppToken({ ...appToken, value: event.target.value });
   };
 
-  const [apiKey, setApiKey] = useState("");
+  const [apiKey, setApiKey] = useState({
+    name: "apiKey",
+    value: "",
+    error: false,
+    errorMessage: "invalid api key",
+  });
   const apiKeyChangeHandler = (event) => {
-    setApiKey(event.target.value);
+    setApiKey({ ...apiKey, value: event.target.value });
   };
 
-  const [activityKind, setActivityKind] = useState("");
+  const [activityKind, setActivityKind] = useState({
+    name: "activityKind",
+    value: "",
+    error: false,
+    errorMessage: "invalid activity kind",
+  });
   const activityKindChangeHandler = (event) => {
-    setActivityKind(event.target.value);
+    setActivityKind({ ...activityKind, value: event.target.value });
   };
 
   const today = new Date().toISOString().slice(0, 10);
-  const [startDate, setStartDate] = useState(today);
+  const [startDate, setStartDate] = useState({
+    name: "startDate",
+    value: today,
+    error: false,
+    errorMessage: "invalid start date",
+  });
   const startDateChangeHandler = (event) => {
-    setStartDate(event.target.value);
+    setStartDate({ ...startDate, value: event.target.value });
   };
-  const [endDate, setEndDate] = useState(today);
+  const [endDate, setEndDate] = useState({
+    name: "endDate",
+    value: today,
+    error: false,
+    errorMessage: "invalid end date",
+  });
   const endDateChangeHandler = (event) => {
-    setEndDate(event.target.value);
+    setEndDate({ ...endDate, value: event.target.value });
   };
 
-  const [timezone, setTimezone] = useState("Asia/Seoul");
+  const [timezone, setTimezone] = useState({
+    name: "timezone",
+    value: DEFAULT_TIME_ZONE,
+    error: false,
+    errorMessage: "invalid timezone",
+  });
   const timezoneChangeHandler = (event) => {
-    setTimezone(event.target.value);
+    setTimezone({ ...timezone, value: event.target.value });
   };
 
   const sendRequestHandler = (event) => {
     event.preventDefault();
+    if (email.value === "") {
+      setEmail({ ...email, error: true });
+      return;
+    }
+
+    if (appToken.value === "") {
+      setAppToken({ ...appToken, error: true });
+      return;
+    }
+
+    if (apiKey.value === "") {
+      setApiKey({ ...apiKey, error: true });
+      return;
+    }
+
+    if (activityKind.value === "") {
+      setActivityKind({ ...activityKind, error: true });
+      return;
+    }
+
+    if (startDate.value === "") {
+      setStartDate({ ...startDate, error: true });
+      return;
+    }
+
+    if (endDate.value === "") {
+      setEndDate({ ...endDate, error: true });
+      return;
+    }
+
+    if (timezone.value === "") {
+      setTimezone({ ...timezone, error: true });
+      return;
+    }
+
     const activityLogRequest = {
-      apiKey,
-      email,
-      appToken,
-      activityKind,
-      startDate,
-      endDate,
-      timezone,
+      apiKey: apiKey.value,
+      email: email.value,
+      appToken: appToken.value,
+      activityKind: activityKind.value,
+      startDate: startDate.value,
+      endDate: endDate.value,
+      timezone: timezone.value,
     };
     console.log(activityLogRequest);
+
+    // after http 200
+    if (email.value === "success") {
+      setEmail({ ...email, value: email.value, error: false });
+      setAppToken({ ...appToken, value: appToken.value, error: false });
+      setApiKey({ ...apiKey, value: apiKey.value, error: false });
+      setActivityKind({ ...activityKind, value: activityKind.value, error: false });
+      setStartDate({ ...startDate, value: startDate.value, error: false });
+      setEndDate({ ...endDate, value: endDate.value, error: false });
+      setTimezone({ ...timezone, value: timezone.value, error: false });
+    }
   };
 
   return (
@@ -120,7 +203,10 @@ function ActivityLog() {
                       required
                       type="email"
                       label="Email"
-                      value={email}
+                      name={email.name}
+                      value={email.value}
+                      error={email.error}
+                      helperText={email.error && email.errorMessage}
                       fullWidth
                       onChange={emailChangeHandler}
                     />
@@ -130,7 +216,10 @@ function ActivityLog() {
                       required
                       type="text"
                       label="App Token"
-                      value={appToken}
+                      name={appToken.name}
+                      value={appToken.value}
+                      error={appToken.error}
+                      helperText={appToken.error && appToken.errorMessage}
                       fullWidth
                       onChange={appTokenChangeHandler}
                     />
@@ -140,7 +229,10 @@ function ActivityLog() {
                       required
                       type="text"
                       label="Api Key"
-                      value={apiKey}
+                      name={apiKey.name}
+                      value={apiKey.value}
+                      error={apiKey.error}
+                      helperText={apiKey.error && apiKey.errorMessage}
                       fullWidth
                       onChange={apiKeyChangeHandler}
                     />
@@ -151,7 +243,10 @@ function ActivityLog() {
                       id="activity-kind-select"
                       select
                       label="Activity Kind"
-                      value={activityKind}
+                      name={activityKind.name}
+                      value={activityKind.value}
+                      error={activityKind.error}
+                      helperText={activityKind.error && activityKind.errorMessage}
                       onChange={activityKindChangeHandler}
                       InputProps={{
                         classes: { root: "select-input-styles" },
@@ -170,7 +265,10 @@ function ActivityLog() {
                       required
                       type="date"
                       label="Start Date"
-                      value={startDate}
+                      name={startDate.name}
+                      value={startDate.value}
+                      error={startDate.error}
+                      helperText={startDate.error && startDate.errorMessage}
                       onChange={startDateChangeHandler}
                       fullWidth
                     />
@@ -180,7 +278,10 @@ function ActivityLog() {
                       required
                       type="date"
                       label="End Date"
-                      value={endDate}
+                      name={endDate.name}
+                      value={endDate.value}
+                      error={endDate.error}
+                      helperText={endDate.error && endDate.errorMessage}
                       onChange={endDateChangeHandler}
                       fullWidth
                     />
@@ -190,7 +291,10 @@ function ActivityLog() {
                       id="timezone-select"
                       select
                       label="Time Zone"
-                      value={timezone}
+                      name={timezone.name}
+                      value={timezone.value}
+                      error={timezone.error}
+                      helperText={timezone.error && timezone.errorMessage}
                       onChange={timezoneChangeHandler}
                       InputProps={{
                         classes: { root: "select-input-styles" },
