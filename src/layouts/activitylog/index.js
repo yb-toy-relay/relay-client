@@ -21,15 +21,43 @@ import MDBox from "components/MDBox";
 // Material Dashboard 2 React example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import { useState } from "react";
 import ActivityLogRequestForm from "./ActivityLogRequestForm";
+import AlertSnackBar from "./AlertSnackBar";
 
 function ActivityLog() {
+  const [open, setOpen] = useState(false);
+  const [severity, setSeverity] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSuccess = (successMessage) => {
+    setOpen(true);
+    setSeverity("success");
+    setMessage(successMessage);
+  };
+
+  const handleError = (errorMessage) => {
+    setOpen(true);
+    setSeverity("error");
+    setMessage(errorMessage);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   // send http request
   const sendActivityLogRequestHandler = (request) => {
     console.log(request);
     // http 200
     if (request.email === "success") {
       request.onSuccess();
+      handleSuccess("200 OK");
+    } else {
+      handleError("500 ERROR");
     }
   };
   return (
@@ -42,6 +70,7 @@ function ActivityLog() {
           </Grid>
         </Grid>
       </MDBox>
+      <AlertSnackBar open={open} severity={severity} message={message} handleClose={handleClose} />
     </DashboardLayout>
   );
 }
