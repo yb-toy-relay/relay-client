@@ -27,7 +27,7 @@ import AlertSnackBar from "./AlertSnackBar";
 
 function ActivityLog() {
   const [open, setOpen] = useState(false);
-  const [severity, setSeverity] = useState("");
+  const [severity, setSeverity] = useState("info");
   const [message, setMessage] = useState("");
 
   const handleSuccess = (successMessage) => {
