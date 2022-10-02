@@ -38,8 +38,8 @@ const activityKinds = [
     label: "Event",
   },
   {
-    value: "install",
-    label: "Install",
+    value: "reattribution",
+    label: "Reattribution",
   },
 ];
 
