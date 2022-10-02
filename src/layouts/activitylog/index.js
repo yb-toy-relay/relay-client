@@ -90,6 +90,20 @@ function ActivityLog() {
     setTimezone(event.target.value);
   };
 
+  const sendRequestHandler = (event) => {
+    event.preventDefault();
+    const activityLogRequest = {
+      apiKey,
+      email,
+      appToken,
+      activityKind,
+      startDate,
+      endDate,
+      timezone,
+    };
+    console.log(activityLogRequest);
+  };
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -192,7 +206,12 @@ function ActivityLog() {
                     </TextField>
                   </MDBox>
                   <MDBox mt={4} mb={2}>
-                    <MDButton variant="gradient" color="info" fullWidth>
+                    <MDButton
+                      variant="gradient"
+                      color="info"
+                      onClick={sendRequestHandler}
+                      fullWidth
+                    >
                       Send CSV File to Email
                     </MDButton>
                   </MDBox>
