@@ -47,8 +47,10 @@ import routes from "routes";
 import { useMaterialUIController, setMiniSidenav } from "context";
 
 // Images
-import brandWhite from "assets/images/logo-appscale.ico";
-import brandDark from "assets/images/logo-appscale-dark.ico";
+// eslint-disable-next-line import/no-duplicates
+import brandWhite from "assets/images/small-logos/devto.svg";
+// eslint-disable-next-line import/no-duplicates
+import brandDark from "assets/images/small-logos/devto.svg";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();

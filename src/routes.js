@@ -46,7 +46,7 @@ const routes = [
     type: "collapse",
     name: "Activity Log",
     key: "activity-log",
-    icon: <Icon fontSize="small">file_present</Icon>,
+    icon: <Icon fontSize="small">file_download</Icon>,
     route: "/activity-log",
     component: <ActivityLog />,
   },
