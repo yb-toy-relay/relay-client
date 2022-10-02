@@ -65,9 +65,9 @@ function ActivityLog() {
     setAppToken(event.target.value);
   };
 
-  const [apiToken, setApiToken] = useState("");
-  const apiTokenChangeHandler = (event) => {
-    setApiToken(event.target.value);
+  const [apiKey, setApiKey] = useState("");
+  const apiKeyChangeHandler = (event) => {
+    setApiKey(event.target.value);
   };
 
   const [activityKind, setActivityKind] = useState("");
@@ -126,10 +126,10 @@ function ActivityLog() {
                     <MDInput
                       required
                       type="text"
-                      label="Api Token"
-                      value={apiToken}
+                      label="Api Key"
+                      value={apiKey}
                       fullWidth
-                      onChange={apiTokenChangeHandler}
+                      onChange={apiKeyChangeHandler}
                     />
                   </MDBox>
                   <MDBox mb={2}>
