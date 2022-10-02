@@ -203,7 +203,6 @@ function ActivityLog() {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }
