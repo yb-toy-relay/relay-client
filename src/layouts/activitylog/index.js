@@ -74,9 +74,9 @@ function ActivityLog() {
   return (
     <DashboardLayout>
       <DashboardNavbar />
-      <MDBox mt={6} mb={3}>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid item xs={12} lg={8}>
+      <MDBox pt={6} pb={3}>
+        <Grid container spacing={6} justifyContent="center">
+          <Grid item xs={12} lg={12}>
             <ActivityLogRequestForm onSubmitHandler={activityLogPostHandler} />
           </Grid>
         </Grid>

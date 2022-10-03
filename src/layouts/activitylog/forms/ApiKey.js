@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import MDBox from "../../../components/MDBox";
 
 export default function ApiKey(prop) {
@@ -9,18 +9,20 @@ export default function ApiKey(prop) {
   };
 
   return (
-    <MDBox mb={2}>
-      <TextField
-        required
-        type="text"
-        label="Api Key"
-        name={apiKey.name}
-        value={apiKey.value}
-        error={apiKey.error}
-        helperText={apiKey.error && apiKey.errorMessage}
-        fullWidth
-        onChange={apiKeyChangeHandler}
-      />
-    </MDBox>
+    <Grid item xs={12} lg={12}>
+      <MDBox mb={2}>
+        <TextField
+          required
+          type="text"
+          label="Api Key"
+          name={apiKey.name}
+          value={apiKey.value}
+          error={apiKey.error}
+          helperText={apiKey.error && apiKey.errorMessage}
+          fullWidth
+          onChange={apiKeyChangeHandler}
+        />
+      </MDBox>
+    </Grid>
   );
 }

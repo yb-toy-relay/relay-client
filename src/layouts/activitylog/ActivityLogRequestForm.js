@@ -118,8 +118,19 @@ function ActivityLogRequestForm(prop) {
   };
   return (
     <Card>
-      <MDBox p={2}>
-        <MDTypography variant="h4">CSV Request</MDTypography>
+      <MDBox
+        mx={2}
+        mt={-3}
+        py={3}
+        px={2}
+        variant="gradient"
+        bgColor="info"
+        borderRadius="lg"
+        coloredShadow="none"
+      >
+        <MDTypography variant="h6" color="white">
+          CSV Request
+        </MDTypography>
       </MDBox>
       <MDBox pt={2} pb={3} px={3}>
         <MDBox component="form" role="form">

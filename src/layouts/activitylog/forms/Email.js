@@ -1,4 +1,5 @@
 import { TextField } from "@mui/material";
+import Grid from "@mui/material/Grid";
 import MDBox from "../../../components/MDBox";
 
 export default function Email(prop) {
@@ -9,18 +10,20 @@ export default function Email(prop) {
   };
 
   return (
-    <MDBox mb={2}>
-      <TextField
-        required
-        type="email"
-        label="Email"
-        name={email.name}
-        value={email.value}
-        error={email.error}
-        helperText={email.error && email.errorMessage}
-        fullWidth
-        onChange={emailChangeHandler}
-      />
-    </MDBox>
+    <Grid item xs={12} lg={12}>
+      <MDBox mb={2}>
+        <TextField
+          required
+          type="email"
+          label="Email"
+          name={email.name}
+          value={email.value}
+          error={email.error}
+          helperText={email.error && email.errorMessage}
+          onChange={emailChangeHandler}
+          fullWidth
+        />
+      </MDBox>
+    </Grid>
   );
 }

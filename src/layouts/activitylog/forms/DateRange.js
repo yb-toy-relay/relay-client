@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { Grid, TextField } from "@mui/material";
 import MDBox from "../../../components/MDBox";
 
 export default function DateRange(prop) {
@@ -13,33 +13,35 @@ export default function DateRange(prop) {
   };
 
   return (
-    <MDBox mb={2}>
+    <Grid item xs={12} lg={12}>
       <MDBox mb={2}>
-        <TextField
-          required
-          type="date"
-          label="Start Date"
-          name={startDate.name}
-          value={startDate.value}
-          error={startDate.error}
-          helperText={startDate.error && startDate.errorMessage}
-          onChange={startDateChangeHandler}
-          fullWidth
-        />
+        <MDBox mb={2}>
+          <TextField
+            required
+            type="date"
+            label="Start Date"
+            name={startDate.name}
+            value={startDate.value}
+            error={startDate.error}
+            helperText={startDate.error && startDate.errorMessage}
+            onChange={startDateChangeHandler}
+            fullWidth
+          />
+        </MDBox>
+        <MDBox>
+          <TextField
+            required
+            type="date"
+            label="End Date"
+            name={endDate.name}
+            value={endDate.value}
+            error={endDate.error}
+            helperText={endDate.error && endDate.errorMessage}
+            onChange={endDateChangeHandler}
+            fullWidth
+          />
+        </MDBox>
       </MDBox>
-      <MDBox>
-        <TextField
-          required
-          type="date"
-          label="End Date"
-          name={endDate.name}
-          value={endDate.value}
-          error={endDate.error}
-          helperText={endDate.error && endDate.errorMessage}
-          onChange={endDateChangeHandler}
-          fullWidth
-        />
-      </MDBox>
-    </MDBox>
+    </Grid>
   );
 }

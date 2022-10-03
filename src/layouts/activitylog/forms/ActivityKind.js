@@ -1,4 +1,4 @@
-import { MenuItem, TextField } from "@mui/material";
+import { Grid, MenuItem, TextField } from "@mui/material";
 import MDBox from "../../../components/MDBox";
 
 const ACTIVITY_KINDS = [
@@ -24,28 +24,30 @@ export default function ActivityKind(prop) {
   };
 
   return (
-    <MDBox mb={2}>
-      <TextField
-        required
-        id="activity-kind-select"
-        select
-        label="Activity Kind"
-        name={activityKind.name}
-        value={activityKind.value}
-        error={activityKind.error}
-        helperText={activityKind.error && activityKind.errorMessage}
-        onChange={activityKindChangeHandler}
-        InputProps={{
-          classes: { root: "select-input-styles" },
-        }}
-        fullWidth
-      >
-        {ACTIVITY_KINDS.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-    </MDBox>
+    <Grid item xs={12} lg={12}>
+      <MDBox mb={2}>
+        <TextField
+          required
+          id="activity-kind-select"
+          select
+          label="Activity Kind"
+          name={activityKind.name}
+          value={activityKind.value}
+          error={activityKind.error}
+          helperText={activityKind.error && activityKind.errorMessage}
+          onChange={activityKindChangeHandler}
+          InputProps={{
+            classes: { root: "select-input-styles" },
+          }}
+          fullWidth
+        >
+          {ACTIVITY_KINDS.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </MDBox>
+    </Grid>
   );
 }

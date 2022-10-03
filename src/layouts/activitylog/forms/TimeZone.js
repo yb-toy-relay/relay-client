@@ -1,4 +1,4 @@
-import { MenuItem, TextField } from "@mui/material";
+import { Grid, MenuItem, TextField } from "@mui/material";
 import MDBox from "../../../components/MDBox";
 
 export const DEFAULT_TIME_ZONE = "Asia/Seoul";
@@ -20,27 +20,29 @@ export default function TimeZone(prop) {
     setTimezone({ ...timezone, value: event.target.value });
   };
   return (
-    <MDBox mb={2}>
-      <TextField
-        id="timezone-select"
-        select
-        label="Time Zone"
-        name={timezone.name}
-        value={timezone.value}
-        error={timezone.error}
-        helperText={timezone.error && timezone.errorMessage}
-        onChange={timezoneChangeHandler}
-        InputProps={{
-          classes: { root: "select-input-styles" },
-        }}
-        fullWidth
-      >
-        {TIMEZONES.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
-            {option.label}
-          </MenuItem>
-        ))}
-      </TextField>
-    </MDBox>
+    <Grid item xs={12} lg={12}>
+      <MDBox mb={2}>
+        <TextField
+          id="timezone-select"
+          select
+          label="Time Zone"
+          name={timezone.name}
+          value={timezone.value}
+          error={timezone.error}
+          helperText={timezone.error && timezone.errorMessage}
+          onChange={timezoneChangeHandler}
+          InputProps={{
+            classes: { root: "select-input-styles" },
+          }}
+          fullWidth
+        >
+          {TIMEZONES.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+      </MDBox>
+    </Grid>
   );
 }
