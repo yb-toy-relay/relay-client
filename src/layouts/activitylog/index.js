@@ -24,6 +24,7 @@ import DashboardNavbar from "components/Navbars/DashboardNavbar";
 import { useState } from "react";
 import ActivityLogRequestForm from "./ActivityLogRequestForm";
 import AlertSnackBar from "./AlertSnackBar";
+import { relayClientApi } from "../../endpoint";
 
 function ActivityLog() {
   const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ function ActivityLog() {
 
   // send http request
   const activityLogPostHandler = (request) => {
-    fetch("http://localhost:8882/relay/v1/activity-log/csv", {
+    fetch(`${relayClientApi()}/relay/v1/activity-log/csv`, {
       method: "POST",
       body: JSON.stringify(request.body),
       headers: {
