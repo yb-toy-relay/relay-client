@@ -1,37 +1,14 @@
-import { MenuItem, TextField } from "@mui/material";
 import Card from "@mui/material/Card";
 import { useState } from "react";
 import MDBox from "../../components/MDBox";
 import MDTypography from "../../components/MDTypography";
 import MDButton from "../../components/MDButton";
-
-const DEFAULT_TIME_ZONE = "Asia/Seoul";
-
-const ACTIVITY_KINDS = [
-  {
-    value: "install",
-    label: "Install",
-  },
-  {
-    value: "event",
-    label: "Event",
-  },
-  {
-    value: "reattribution",
-    label: "Reattribution",
-  },
-];
-
-const TIMEZONES = [
-  {
-    value: DEFAULT_TIME_ZONE,
-    label: DEFAULT_TIME_ZONE,
-  },
-  {
-    value: "UTC",
-    label: "UTC",
-  },
-];
+import Email from "./forms/Email";
+import AppToken from "./forms/AppToken";
+import ApiKey from "./forms/ApiKey";
+import ActivityKind from "./forms/ActivityKind";
+import DateRange from "./forms/DateRange";
+import TimeZone, { DEFAULT_TIME_ZONE } from "./forms/TimeZone";
 
 function ActivityLogRequestForm(prop) {
   const { onSubmitHandler } = prop;
@@ -41,9 +18,6 @@ function ActivityLogRequestForm(prop) {
     error: false,
     errorMessage: "invalid email",
   });
-  const emailChangeHandler = (event) => {
-    setEmail({ ...email, value: event.target.value });
-  };
 
   const [appToken, setAppToken] = useState({
     name: "appToken",
@@ -51,9 +25,6 @@ function ActivityLogRequestForm(prop) {
     error: false,
     errorMessage: "invalid app token",
   });
-  const appTokenChangeHandler = (event) => {
-    setAppToken({ ...appToken, value: event.target.value });
-  };
 
   const [apiKey, setApiKey] = useState({
     name: "apiKey",
@@ -61,9 +32,6 @@ function ActivityLogRequestForm(prop) {
     error: false,
     errorMessage: "invalid api key",
   });
-  const apiKeyChangeHandler = (event) => {
-    setApiKey({ ...apiKey, value: event.target.value });
-  };
 
   const [activityKind, setActivityKind] = useState({
     name: "activityKind",
@@ -71,9 +39,6 @@ function ActivityLogRequestForm(prop) {
     error: false,
     errorMessage: "invalid activity kind",
   });
-  const activityKindChangeHandler = (event) => {
-    setActivityKind({ ...activityKind, value: event.target.value });
-  };
 
   const today = new Date().toISOString().slice(0, 10);
   const [startDate, setStartDate] = useState({
@@ -82,18 +47,12 @@ function ActivityLogRequestForm(prop) {
     error: false,
     errorMessage: "invalid start date",
   });
-  const startDateChangeHandler = (event) => {
-    setStartDate({ ...startDate, value: event.target.value });
-  };
   const [endDate, setEndDate] = useState({
     name: "endDate",
     value: today,
     error: false,
     errorMessage: "invalid end date",
   });
-  const endDateChangeHandler = (event) => {
-    setEndDate({ ...endDate, value: event.target.value });
-  };
 
   const [timezone, setTimezone] = useState({
     name: "timezone",
@@ -101,9 +60,6 @@ function ActivityLogRequestForm(prop) {
     error: false,
     errorMessage: "invalid timezone",
   });
-  const timezoneChangeHandler = (event) => {
-    setTimezone({ ...timezone, value: event.target.value });
-  };
 
   const sendRequestHandler = (event) => {
     event.preventDefault();
@@ -167,116 +123,17 @@ function ActivityLogRequestForm(prop) {
       </MDBox>
       <MDBox pt={2} pb={3} px={3}>
         <MDBox component="form" role="form">
-          <MDBox mb={2}>
-            <TextField
-              required
-              type="email"
-              label="Email"
-              name={email.name}
-              value={email.value}
-              error={email.error}
-              helperText={email.error && email.errorMessage}
-              fullWidth
-              onChange={emailChangeHandler}
-            />
-          </MDBox>
-          <MDBox mb={2}>
-            <TextField
-              required
-              type="text"
-              label="App Token"
-              name={appToken.name}
-              value={appToken.value}
-              error={appToken.error}
-              helperText={appToken.error && appToken.errorMessage}
-              fullWidth
-              onChange={appTokenChangeHandler}
-            />
-          </MDBox>
-          <MDBox mb={2}>
-            <TextField
-              required
-              type="text"
-              label="Api Key"
-              name={apiKey.name}
-              value={apiKey.value}
-              error={apiKey.error}
-              helperText={apiKey.error && apiKey.errorMessage}
-              fullWidth
-              onChange={apiKeyChangeHandler}
-            />
-          </MDBox>
-          <MDBox mb={2}>
-            <TextField
-              required
-              id="activity-kind-select"
-              select
-              label="Activity Kind"
-              name={activityKind.name}
-              value={activityKind.value}
-              error={activityKind.error}
-              helperText={activityKind.error && activityKind.errorMessage}
-              onChange={activityKindChangeHandler}
-              InputProps={{
-                classes: { root: "select-input-styles" },
-              }}
-              fullWidth
-            >
-              {ACTIVITY_KINDS.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </MDBox>
-          <MDBox mb={2}>
-            <TextField
-              required
-              type="date"
-              label="Start Date"
-              name={startDate.name}
-              value={startDate.value}
-              error={startDate.error}
-              helperText={startDate.error && startDate.errorMessage}
-              onChange={startDateChangeHandler}
-              fullWidth
-            />
-          </MDBox>
-          <MDBox mb={2}>
-            <TextField
-              required
-              type="date"
-              label="End Date"
-              name={endDate.name}
-              value={endDate.value}
-              error={endDate.error}
-              helperText={endDate.error && endDate.errorMessage}
-              onChange={endDateChangeHandler}
-              fullWidth
-            />
-          </MDBox>
-          <MDBox mb={2}>
-            <TextField
-              id="timezone-select"
-              select
-              label="Time Zone"
-              name={timezone.name}
-              value={timezone.value}
-              error={timezone.error}
-              helperText={timezone.error && timezone.errorMessage}
-              onChange={timezoneChangeHandler}
-              InputProps={{
-                classes: { root: "select-input-styles" },
-              }}
-              fullWidth
-            >
-              {TIMEZONES.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </MDBox>
+          <Email email={email} setEmail={setEmail} />
+          <AppToken appToken={appToken} setAppToken={setAppToken} />
+          <ApiKey apiKey={apiKey} setApiKey={setApiKey} />
+          <ActivityKind activityKind={activityKind} setActivityKind={setActivityKind} />
+          <DateRange
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+          />
+          <TimeZone timezone={timezone} setTimezone={setTimezone} />
           <MDBox mt={4} mb={2}>
             <MDButton variant="gradient" color="info" onClick={sendRequestHandler} fullWidth>
               Send CSV File to Email
