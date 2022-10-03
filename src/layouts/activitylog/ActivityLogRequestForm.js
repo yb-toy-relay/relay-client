@@ -9,7 +9,7 @@ import ApiKey from "./forms/ApiKey";
 import ActivityKind from "./forms/ActivityKind";
 import DateRange from "./forms/DateRange";
 import TimeZone, { DEFAULT_TIME_ZONE } from "./forms/TimeZone";
-import { isEmpty, isNotEmailFormat } from "./validator";
+import { isEmpty, isNotEmailFormat, isStartDateBeforeEndDate, isValidRange } from "./validator";
 
 function ActivityLogRequestForm(prop) {
   const { onSubmitHandler } = prop;
@@ -84,6 +84,12 @@ function ActivityLogRequestForm(prop) {
       return;
     }
     if (isEmpty(endDate, setEndDate)) {
+      return;
+    }
+    if (!isStartDateBeforeEndDate(startDate, setStartDate, endDate)) {
+      return;
+    }
+    if (!isValidRange(startDate, setStartDate, endDate, setEndDate)) {
       return;
     }
     if (isEmpty(timezone, setTimezone)) {
