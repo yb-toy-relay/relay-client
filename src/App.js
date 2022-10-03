@@ -25,7 +25,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 // Material Dashboard 2 React components
 
 // Material Dashboard 2 React example components
-import Sidenav from "examples/Sidenav";
+import Sidenav from "components/Sidenav";
 
 // Material Dashboard 2 React themes
 import theme from "assets/theme";
