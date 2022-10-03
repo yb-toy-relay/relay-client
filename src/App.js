@@ -48,9 +48,9 @@ import { useMaterialUIController, setMiniSidenav } from "context";
 
 // Images
 // eslint-disable-next-line import/no-duplicates
-import brandWhite from "assets/images/small-logos/devto.svg";
+import brandWhite from "assets/images/appscale-logo-only.png";
 // eslint-disable-next-line import/no-duplicates
-import brandDark from "assets/images/small-logos/devto.svg";
+import brandDark from "assets/images/appscale-logo-only.png";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -125,7 +125,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="App Scale"
+            brandName="AppScale"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -145,7 +145,7 @@ export default function App() {
         <Sidenav
           color={sidenavColor}
           brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-          brandName="App Scale"
+          brandName="AppScale"
           routes={routes}
           onMouseEnter={handleOnMouseEnter}
           onMouseLeave={handleOnMouseLeave}
