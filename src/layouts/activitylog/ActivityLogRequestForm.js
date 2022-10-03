@@ -9,6 +9,7 @@ import ApiKey from "./forms/ApiKey";
 import ActivityKind from "./forms/ActivityKind";
 import DateRange from "./forms/DateRange";
 import TimeZone, { DEFAULT_TIME_ZONE } from "./forms/TimeZone";
+import { isEmpty, isNotEmailFormat } from "./validator";
 
 function ActivityLogRequestForm(prop) {
   const { onSubmitHandler } = prop;
@@ -64,16 +65,10 @@ function ActivityLogRequestForm(prop) {
   const sendRequestHandler = (event) => {
     event.preventDefault();
 
-    const isEmpty = (stateObject, setState) => {
-      if (stateObject.value === "") {
-        setState({ ...stateObject, error: true });
-        return true;
-      }
-      setState({ ...stateObject, value: stateObject.value, error: false });
-      return false;
-    };
-
     if (isEmpty(email, setEmail)) {
+      return;
+    }
+    if (isNotEmailFormat(email, setEmail)) {
       return;
     }
     if (isEmpty(appToken, setAppToken)) {
