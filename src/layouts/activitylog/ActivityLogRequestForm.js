@@ -96,13 +96,13 @@ function ActivityLogRequestForm(prop) {
     }
 
     const onSuccessCallback = () => {
-      setEmail({ ...email, value: email.value, error: false });
-      setAppToken({ ...appToken, value: appToken.value, error: false });
-      setApiKey({ ...apiKey, value: apiKey.value, error: false });
+      setEmail({ ...email, error: false });
+      setAppToken({ ...appToken, error: false });
+      setApiKey({ ...apiKey, error: false });
       setActivityKind({ ...activityKind, value: "", error: false });
-      setStartDate({ ...startDate, value: startDate.value, error: false });
-      setEndDate({ ...endDate, value: endDate.value, error: false });
-      setTimezone({ ...timezone, value: timezone.value, error: false });
+      setStartDate({ ...startDate, error: false });
+      setEndDate({ ...endDate, error: false });
+      setTimezone({ ...timezone, error: false });
     };
 
     const body = {
