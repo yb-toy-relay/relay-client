@@ -7,7 +7,7 @@ export function isEmpty(stateObject, setState) {
   return false;
 }
 
-const VALID_EMAIL_FORMAT = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+const VALID_EMAIL_FORMAT = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,5})+$/;
 
 export function isNotEmailFormat(email, setEmail) {
   if (!VALID_EMAIL_FORMAT.test(email.value)) {
