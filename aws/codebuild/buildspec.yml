@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - npm install
+  build:
+    commands:
+      - echo Build Starting on `date`
+      - npm run build
+  post_build:
+    commands:
+      - pwd
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: build
