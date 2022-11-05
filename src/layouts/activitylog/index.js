@@ -60,12 +60,17 @@ function ActivityLog() {
       },
     })
       .then((response) => {
-        if (!response.ok) {
-          handleError(`Request Failed. status: ${response.status}`);
+        if (response.status === 204) {
+          request.onSuccessCallback();
+          handleSuccess(`No Data. status: ${response.status}`);
           return;
         }
-        request.onSuccessCallback();
-        handleSuccess(`Request Success. status: ${response.status}`);
+        if (response.ok) {
+          request.onSuccessCallback();
+          handleSuccess(`Request Success. status: ${response.status}`);
+          return;
+        }
+        handleError(`Request Failed. status: ${response.status}`);
       })
       .catch((err) => {
         console.error("http request not available:", err);
